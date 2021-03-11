@@ -8,6 +8,11 @@ ENV GO111MODULE on
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get update && apt-get install -y build-essential libssl-dev curl nodejs tofrodos dos2unix zip
 
+RUN apt-get install -y locales locales-all
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 ADD . ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
 RUN rm -rf cmd/server-manager/typescript/node_modules
@@ -22,7 +27,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV SERVER_USER assetto
 ENV SERVER_MANAGER_DIR /home/${SERVER_USER}/server-manager/
 ENV SERVER_INSTALL_DIR ${SERVER_MANAGER_DIR}/assetto
-ENV LANG C.UTF-8
 
 ENV STEAMCMD_URL="http://media.steampowered.com/installer/steamcmd_linux.tar.gz"
 ENV STEAMROOT=/opt/steamcmd
