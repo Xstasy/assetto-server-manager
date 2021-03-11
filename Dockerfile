@@ -28,6 +28,7 @@ ENV SERVER_USER assetto
 ENV SERVER_MANAGER_DIR /home/${SERVER_USER}/server-manager/
 ENV SERVER_INSTALL_DIR ${SERVER_MANAGER_DIR}/assetto
 
+
 ENV STEAMCMD_URL="http://media.steampowered.com/installer/steamcmd_linux.tar.gz"
 ENV STEAMROOT=/opt/steamcmd
 
@@ -36,6 +37,9 @@ RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get update && apt-get install -y build-essential libssl-dev curl lib32gcc1 lib32stdc++6 nodejs
 RUN mkdir -p ${STEAMROOT}
 WORKDIR ${STEAMROOT}
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 RUN curl -s ${STEAMCMD_URL} | tar -vxz
 ENV PATH "${STEAMROOT}:${PATH}"
 
